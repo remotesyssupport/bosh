@@ -7,6 +7,7 @@ module Bosh::Director
     attr_accessor :ready_tasks
     attr_accessor :network_reservations
 
+    # @param [Bosh::Director::DeploymentPlan] deployment_plan
     def initialize(deployment_plan)
       @deployment_plan = deployment_plan
       @cloud = Config.cloud
@@ -21,6 +22,8 @@ module Bosh::Director
       @vm_reuser = VmReuser.new
     end
 
+    # Orchestrate the compilation of the package
+    # This is the primary command action on PackageCompiler
     def compile
       @ready_tasks = []
       generate_compile_tasks
@@ -75,6 +78,7 @@ module Bosh::Director
       end
     end
 
+    # @param [Bosh::Director::CompileTask] task
     def process_task(task)
       package = task.package
       stemcell = task.stemcell
@@ -133,6 +137,7 @@ module Bosh::Director
       "#{stemcell.name}/#{stemcell.version}"
     end
 
+    # @param [Bosh::Director::CompileTask] task
     def compile_package(task)
       package = task.package
       stemcell = task.stemcell
