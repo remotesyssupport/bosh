@@ -35,43 +35,47 @@ module ECloudCloud
     end
 
     def create_stemcell(image, _)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def delete_stemcell(stemcell)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#delete_stemcell")
+      not_implemented("delete_stemcell")
     end
 
     def create_vm(agent_id, stemcell, resource_pool, networks, disk_locality = nil, environment = nil)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def delete_vm(vm_cid)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def reboot_vm(vm_cid)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def configure_networks(vm_cid, networks)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def attach_disk(vm_cid, disk_cid)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def detach_disk(vm_cid, disk_cid)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def create_disk(size, _ = nil)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
     end
 
     def delete_disk(disk_cid)
-      raise Bosh::Clouds::NotImplemented.new("ECloudCloud::Cloud#create_stemcell")
+      not_implemented("create_stemcell")
+    end
+
+    def validate_deployment(old_manifest, new_manifest)
+      not_implemented(:validate_deployment)
     end
 
     protected
