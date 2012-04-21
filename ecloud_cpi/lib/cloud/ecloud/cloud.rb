@@ -25,13 +25,22 @@ module ECloudCloud
     #       vdc:
     #         href: 'https://services.enterprisecloud.terremark.com/api/v0.8b-ext2.6/vdc/999'
     def initialize(options)
+      @options = options.dup
       @logger = Bosh::Clouds::Config.logger
-      @agent_properties = options["agent"]
+      @agent_properties = @options["agent"]
 
+      p @options
       @ecloud_properties = @options["ecloud"]
       @vdc_properties = @ecloud_properties.delete("vdc")
 
-      @client =  Fog::Compute.new({ :provider => 'Ecloud' }.merge(@ecloud_properties)})
+      @fog_connection = {
+        :provider            => 'Ecloud',
+        :ecloud_username     => @ecloud_properties["ecloud_username"],
+        :ecloud_password     => @ecloud_properties["ecloud_password"],
+        :ecloud_version      => @ecloud_properties["ecloud_version"],
+        :ecloud_versions_uri => @ecloud_properties["ecloud_versions_uri"]
+      }
+      @client =  Fog::Compute.new(@fog_connection)
     end
 
     def create_stemcell(image, _)

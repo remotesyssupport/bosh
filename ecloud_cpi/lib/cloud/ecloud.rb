@@ -4,6 +4,9 @@ require "common/thread_pool"
 require "common/thread_formatter"
 require "uuidtools"
 
+require "cloud"
+require "cloud/ecloud/cloud"
+
 autoload :ECloudCloud, "cloud/ecloud/cloud"
 
 module Bosh
