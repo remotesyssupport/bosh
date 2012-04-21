@@ -1,0 +1,25 @@
+PATH
+  remote: .
+  specs:
+    ecloud_cpi (0.0.1)
+      bosh_common (>= 0.4.0)
+      bosh_cpi (>= 0.4.2)
+      httpclient (>= 2.2.0)
+      uuidtools (>= 2.1.2)
+      yajl-ruby (>= 0.8.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bosh_common (0.4.0)
+    bosh_cpi (0.4.2)
+      bosh_common
+    httpclient (2.2.4)
+    uuidtools (2.1.2)
+    yajl-ruby (1.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ecloud_cpi!
