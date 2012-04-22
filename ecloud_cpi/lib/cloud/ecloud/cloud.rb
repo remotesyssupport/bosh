@@ -51,39 +51,39 @@ module ECloudCloud
     end
 
     def create_vm(agent_id, stemcell, resource_pool, networks, disk_locality = nil, environment = nil)
-      not_implemented("create_stemcell")
+      not_implemented("create_vm")
     end
 
     def delete_vm(vm_cid)
-      not_implemented("create_stemcell")
+      not_implemented("delete_vm")
     end
 
     def reboot_vm(vm_cid)
-      not_implemented("create_stemcell")
+      not_implemented("reboot_vm")
     end
 
     def configure_networks(vm_cid, networks)
-      not_implemented("create_stemcell")
+      not_implemented("configure_networks")
     end
 
     def attach_disk(vm_cid, disk_cid)
-      not_implemented("create_stemcell")
+      not_implemented("attach_disk")
     end
 
     def detach_disk(vm_cid, disk_cid)
-      not_implemented("create_stemcell")
+      not_implemented("detach_disk")
     end
 
     def create_disk(size, _ = nil)
-      not_implemented("create_stemcell")
+      not_implemented("create_disk")
     end
 
     def delete_disk(disk_cid)
-      not_implemented("create_stemcell")
+      not_implemented("delete_disk")
     end
 
     def validate_deployment(old_manifest, new_manifest)
-      not_implemented(:validate_deployment)
+      not_implemented("validate_deployment") # nor implemented in vsphere nor aws CPIs
     end
 
     protected
