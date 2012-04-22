@@ -28,7 +28,7 @@ module Bosh
       end
     end
 
-    Ecloud = ECloud # alias name for dynamic plugin loading
+    Ecloud = ECloud # alias name
   end
 
 end

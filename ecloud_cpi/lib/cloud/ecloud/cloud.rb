@@ -7,7 +7,8 @@ module ECloudCloud
 
     class TimeoutException < StandardError; end
 
-    attr_accessor :client
+    attr_reader :client
+    attr_reader :vdc_properties
 
     ##
     # Initialize BOSH ECloud CPI
@@ -29,18 +30,16 @@ module ECloudCloud
       @logger = Bosh::Clouds::Config.logger
       @agent_properties = @options["agent"]
 
-      p @options
-      @ecloud_properties = @options["ecloud"]
-      @vdc_properties = @ecloud_properties.delete("vdc")
-
       @fog_connection = {
         :provider            => 'Ecloud',
-        :ecloud_username     => @ecloud_properties["ecloud_username"],
-        :ecloud_password     => @ecloud_properties["ecloud_password"],
-        :ecloud_version      => @ecloud_properties["ecloud_version"],
-        :ecloud_versions_uri => @ecloud_properties["ecloud_versions_uri"]
+        :ecloud_username     => @options["ecloud"]["ecloud_username"],
+        :ecloud_password     => @options["ecloud"]["ecloud_password"],
+        :ecloud_version      => @options["ecloud"]["ecloud_version"],
+        :ecloud_versions_uri => @options["ecloud"]["ecloud_versions_uri"]
       }
       @client =  Fog::Compute.new(@fog_connection)
+
+      @vdc_properties = @options["ecloud"]["vdc"]
     end
 
     def create_stemcell(image, _)
