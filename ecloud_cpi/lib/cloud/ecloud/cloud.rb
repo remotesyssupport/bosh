@@ -96,7 +96,7 @@ module ECloudCloud
     # @param [optional, String, Array] disk_locality disk id(s) if known of the disk(s) that will be
     #                                    attached to this vm
     # @param [optional, Hash] env environment that will be passed to this vm
-    # @return [String] opaque id later used by {#configure_networks}, {#attach_disk},
+    # @return [String] opaque id later used by {#delete_vm}, {#configure_networks}, {#attach_disk},
     #                  {#detach_disk}, and {#delete_vm}
     def create_vm(agent_id, stemcell_id, resource_pool,
                   networks, disk_locality = nil, env = nil)
@@ -106,10 +106,20 @@ module ECloudCloud
     ##
     # Deletes a VM
     #
-    # @param [String] vm vm id that was once returned by {#create_vm}
+    # @param [String] instance_id id that was once returned by {#create_vm}
     # @return nil
-    def delete_vm(vm_id)
-      not_implemented(:delete_vm)
+    def delete_vm(instance_id)
+      with_thread_name("delete_vm(#{instance_id})") do
+        instance = @client.servers.get(instance_id)
+
+        instance.destroy
+        state = instance.friendly_status
+
+        @logger.info("Deleting instance `#{instance.id}', " \
+                     "state is `#{state}'")
+
+        wait_resource(instance, state, "off", :friendly_status)
+      end
     end
 
     ##
@@ -118,7 +128,7 @@ module ECloudCloud
     # @param [String] vm vm id that was once returned by {#create_vm}
     # @param [Optional, Hash] CPI specific options (e.g hard/soft reboot)
     # @return nil
-    def reboot_vm(vm_id)
+    def reboot_vm(instance_id)
       not_implemented(:reboot_vm)
     end
 
@@ -129,7 +139,7 @@ module ECloudCloud
     # @param [Hash] networks list of networks and their settings needed for this VM,
     #               same as the networks argument in {#create_vm}
     # @return nil
-    def configure_networks(vm_id, networks)
+    def configure_networks(instance_id, networks)
       not_implemented(:configure_networks)
     end
 
@@ -162,7 +172,7 @@ module ECloudCloud
     # @param [String] vm vm id that was once returned by {#create_vm}
     # @param [String] disk disk id that was once returned by {#create_disk}
     # @return nil
-    def attach_disk(vm_id, disk_id)
+    def attach_disk(instance_id, disk_id)
       not_implemented(:attach_disk)
     end
 
@@ -172,7 +182,7 @@ module ECloudCloud
     # @param [String] vm vm id that was once returned by {#create_vm}
     # @param [String] disk disk id that was once returned by {#create_disk}
     # @return nil
-    def detach_disk(vm_id, disk_id)
+    def detach_disk(instance_id, disk_id)
       not_implemented(:detach_disk)
     end
 

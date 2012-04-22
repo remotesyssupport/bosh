@@ -5,6 +5,7 @@ require "common/thread_formatter"
 require "uuidtools"
 
 require "cloud"
+require "cloud/ecloud/helper"
 require "cloud/ecloud/cloud"
 
 autoload :ECloudCloud, "cloud/ecloud/cloud"
